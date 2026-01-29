@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Background for glassmorphism UI */
+body {
+	background-color: #000000;
+	background-image:
+		radial-gradient(at 47% 33%, hsl(341.32, 100%, 50%) 0, transparent 59%),
+		radial-gradient(at 82% 65%, hsl(217.74, 100%, 11%) 0, transparent 55%);
+}
+
+html,
+body,
+#svelte {
+	height: 100%;
+	margin: 0;
+}
