@@ -1,0 +1,57 @@
+
+App: SvelteKit + Capacitor
+
+Offline: character/episode script chunks downloaded; assets are plaintext files
+
+Script: encrypted chunks (AES-256-GCM), A안(episode_version 당 1 key), chunk마다 nonce 포함
+
+Story: linear main story; paid choice triggers a side_event then returns to mainline (no permanent branching)
+
+No features: skip/rewind/bookmark/search, no AI
+
+State persistence: store only choices and minimal state; do NOT store full chat logs text
+
+DB: SQLite with two tables
+
+
+
+SQLite tables
+
+save_slot
+
+slot_id TEXT PK
+
+character_id TEXT
+
+episode_version TEXT
+
+current_node_id TEXT
+
+state_json TEXT // gems + paidSeen map etc
+
+updated_at INTEGER (unix ms)
+
+choice_event
+
+slot_id TEXT
+
+seq INTEGER
+
+node_id TEXT
+
+choice_id TEXT
+
+is_paid INTEGER
+
+gem_cost INTEGER
+
+ts INTEGER (unix ms)
+PK(slot_id, seq)
+INDEX(slot_id)
+
+Runtime rules
+
+On resume: load save_slot, replay choice_event in seq order on script runtime to reach current_node_id
+
+Paid choice: deduct gems if sufficient; mark paidSeen[node_id:choice_id]=true; execute side_event nodes; then return to mainline node specified by script
+
