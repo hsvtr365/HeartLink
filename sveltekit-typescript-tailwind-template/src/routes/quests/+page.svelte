@@ -34,8 +34,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </svelte:head>
 
-<div class="flex flex-col gap-4">
-	<div class="flex items-center gap-2">
+<div class="flex flex-col gap-4 ">
+	<div class="flex items-center gap-2 px-4">
 		{#each tabs as tab}
 			<button
 				class={`rounded-full px-4 py-2 text-xs ${

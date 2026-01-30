@@ -128,7 +128,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </svelte:head>
 
-<div class="flex h-full flex-col gap-4">
+<div class="flex h-full flex-col gap-4 px-4">
 	<div class="flex items-center justify-between">
 		<h2 class="text-lg font-semibold">추천</h2>
 		<span class="text-xs text-white/60">스와이프해서 선택</span>

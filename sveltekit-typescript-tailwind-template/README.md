@@ -1,3 +1,10 @@
+# 프로덕션에서 띄우기 
+yarn build
+yarn preview
+
+
+=========================================
+
 # Sveltekit Tailwind Typescript Template
 
 This projects is an enhancement of the templated project that is generated when scaffolding a sveltekit project. In addition to the tools that the original template brings, this template also includes:
@@ -55,3 +62,36 @@ If you'd rather disable/enable only certain hooks, it's only a matter of removin
 - `commit-msg`: validates commit messages on an individual commit conform to (more/less) semantic commit convention (see `commitlint.config.js` to customize this)
 - `pre-commit`: formats staged code using [lint-staged](https://github.com/okonet/lint-staged) based on `.prettierrc` configuration
 - `pre-push`: runs [Playwright](https://playwright.dev/) tests before pushing commits to the remote origin
+
+## Deployment (Node / SSR)
+
+This project can be deployed with `@sveltejs/adapter-node` when you need SSR on your own server.
+
+1) Install the adapter:
+
+```bash
+yarn add -D @sveltejs/adapter-node
+```
+
+2) Update `svelte.config.js`:
+
+```js
+import adapter from '@sveltejs/adapter-node';
+
+const config = {
+	kit: {
+		adapter: adapter()
+	}
+};
+
+export default config;
+```
+
+3) Build and run:
+
+```bash
+yarn build
+node build
+```
+
+Tip: In production, run `node build` with a process manager (e.g. systemd/pm2).

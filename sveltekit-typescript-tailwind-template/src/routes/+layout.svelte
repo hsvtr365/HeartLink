@@ -125,7 +125,7 @@
 		</div>
 
 		<!-- Page content -->
-		<div class="flex-1 overflow-y-auto px-4 pb-[calc(var(--nav-h)+1rem)] scroll-pb-[calc(var(--nav-h)+1rem)]">
+		<div class="flex-1 overflow-y-auto pb-[calc(var(--nav-h)+0rem)] scroll-pb-[calc(var(--nav-h)+1rem)]">
 			<slot />
 		</div>
 
