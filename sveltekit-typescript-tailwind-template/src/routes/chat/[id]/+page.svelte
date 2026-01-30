@@ -4,7 +4,7 @@
 	import { getMessagesByChatId } from '$lib/data/messages';
 	import { progressStorage } from '$lib/storage';
 	import { browser } from '$app/environment';
-	import { tick } from 'svelte';
+	import { afterUpdate, tick } from 'svelte';
 
 	const decodeId = (value) => {
 		try {
@@ -18,6 +18,7 @@
 	let messages = [];
 	const episode = 0;
 	let scrollEl;
+	let lastMessageCount = 0;
 
 	const loadProgress = async (id) => {
 		if (!id) return;
@@ -81,14 +82,15 @@
 		typing = false;
 	}
 
-	$: if (browser) {
-		const pendingScroll = messages.length;
+	afterUpdate(() => {
+		if (!browser) return;
+		if (!scrollEl) return;
+		if (messages.length === lastMessageCount) return;
+		lastMessageCount = messages.length;
 		tick().then(() => {
-			if (scrollEl && messages.length === pendingScroll) {
-				scrollEl.scrollTop = scrollEl.scrollHeight;
-			}
+			scrollEl.scrollTop = scrollEl.scrollHeight;
 		});
-	}
+	});
 </script>
 
 <svelte:head>
